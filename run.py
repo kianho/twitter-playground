@@ -22,12 +22,14 @@ import os
 import sys
 import json
 import tweepy
+import pprint
 
 from docopt import docopt
 
 
+
 def main(opts):
-    """The driver function.
+    """The main driver function.
 
     """
 
@@ -39,7 +41,8 @@ def main(opts):
 
     api = tweepy.API(auth)
 
-    # Add twitter search here.
+    for tweet in tweepy.Cursor(api.search, q="#HackyHour").items():
+        print((tweet.text, tweet.retweeted, tweet.retweet_count, tweet.user.name))
 
     return
 
